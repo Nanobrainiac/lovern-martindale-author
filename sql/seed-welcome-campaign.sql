@@ -43,7 +43,7 @@ CROSS JOIN (
         <p>I am so glad you are here.</p>
         <p>Your Meadow Lake Reader Bonus Pack is ready whenever you want to open it again: <a href="{{bonus_pack_url}}">download the bonus pack</a>.</p>
         <p>Meadow Lake is built for readers who love emotional small-town romance: coffee on a rushed morning, families who show up, quiet grief, patient love, and second chances that feel earned.</p>
-        <p>If you are new to the series, start with <em>When Bruised Hearts Collide</em>. It begins with Sylvie Charles, Rhys Anderson, and one ordinary forgotten coffee that changes more than either of them expects.</p>
+        <p>If you are new to the series, start with <a href="https://www.amazon.com/When-Bruised-Hearts-Collide-Meadow-ebook/dp/B0FKTR4P1Z/"><em>When Bruised Hearts Collide</em></a>. It begins with Sylvie Charles, Rhys Anderson, and one ordinary forgotten coffee that changes more than either of them expects.</p>
         <p>Warmly,<br>Lovern Martindale</p>
         <p style="font-size:13px;color:#735b57;">You are receiving this because you requested the Meadow Lake Reader Bonus Pack. You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
@@ -59,7 +59,7 @@ CROSS JOIN (
         <p>Some begin with a woman trying to keep herself together, a man who notices more than she expects, and a coffee she meant to remember.</p>
         <p>That is the doorway into <em>When Bruised Hearts Collide</em>, the first Meadow Lake romance. Sylvie Charles is carrying a grief she does not advertise. Rhys Anderson owns the kind of cafe where ordinary mornings can become turning points.</p>
         <p>This book is for readers who love wounded characters, small-town warmth, emotional restraint, dogs underfoot, and love that feels safest when it starts quietly.</p>
-        <p>If that sounds like your kind of comfort read, this is the book to start with.</p>
+        <p>If that sounds like your kind of comfort read, <a href="https://www.amazon.com/When-Bruised-Hearts-Collide-Meadow-ebook/dp/B0FKTR4P1Z/">start <em>When Bruised Hearts Collide</em> on Amazon</a>.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
@@ -88,7 +88,7 @@ CROSS JOIN (
         <p>Hi {{first_name}},</p>
         <p>If <em>When Bruised Hearts Collide</em> is about the ordinary moment that opens a door, <em>When Bruised Hearts Heal</em> is about what happens when staying becomes its own kind of courage.</p>
         <p>Camille Jordan and Theo Beckett bring a different ache to Meadow Lake. Their story carries creative work, business pressure, family warmth, romantic hesitation, and the quiet question underneath so many healing romances: what if love does not fix you, but gives you room to become whole?</p>
-        <p>You do not need spoilers to know whether this one is for you. If you love patient tension, soft hope after hard seasons, and a town full of people who keep pulling each other back toward home, Book 2 belongs on your list.</p>
+        <p>You do not need spoilers to know whether this one is for you. If you love patient tension, soft hope after hard seasons, and a town full of people who keep pulling each other back toward home, <a href="https://www.amazon.com/When-Bruised-Hearts-Heal-Meadow-ebook/dp/B0GJTZKM6T/">Book 2 belongs on your list</a>.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
