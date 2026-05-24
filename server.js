@@ -83,6 +83,7 @@ function pageShell({ title, description, body, extraClass = "" }) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="${extraClass}">
