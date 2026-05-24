@@ -188,7 +188,7 @@ h3 {
 }
 
 .section-heading p,
-.book-grid p,
+.featured-book p,
 .author-strip p,
 .feature-grid p,
 .center-panel p,
@@ -197,7 +197,7 @@ h3 {
   font-family: Arial, sans-serif;
 }
 
-.book-grid {
+.featured-book {
   align-items: center;
   display: grid;
   gap: 44px;
@@ -206,10 +206,60 @@ h3 {
   max-width: 980px;
 }
 
-.book-grid img {
+.featured-book img,
+.book-card img,
+.series-image {
   border-radius: 8px;
   box-shadow: var(--shadow);
   max-width: 100%;
+}
+
+.secondary-books {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 42px auto 0;
+  max-width: 980px;
+}
+
+.book-card {
+  align-items: center;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 140px minmax(0, 1fr);
+  padding: 18px;
+}
+
+.book-card.secondary img {
+  width: 140px;
+}
+
+.text-link {
+  color: var(--rose-dark);
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.series-band {
+  align-items: center;
+  background: var(--paper);
+  display: grid;
+  gap: clamp(30px, 6vw, 70px);
+  grid-template-columns: minmax(0, 0.95fr) minmax(280px, 520px);
+  padding: clamp(50px, 8vw, 90px) clamp(18px, 7vw, 96px);
+}
+
+.series-copy {
+  max-width: 680px;
+}
+
+.series-copy p {
+  color: var(--muted);
+  font-family: Arial, sans-serif;
 }
 
 .check-list {
@@ -519,10 +569,11 @@ fieldset {
 
   .hero,
   .signup-hero,
-  .book-grid,
+  .featured-book,
   .author-strip,
   .feature-grid,
-  .calendar-layout {
+  .calendar-layout,
+  .series-band {
     grid-template-columns: 1fr;
   }
 
@@ -536,6 +587,14 @@ fieldset {
   }
 
   .author-strip img {
+    justify-self: center;
+  }
+
+  .series-copy {
+    text-align: center;
+  }
+
+  .series-image {
     justify-self: center;
   }
 }
@@ -552,5 +611,19 @@ fieldset {
   .button-row,
   .button {
     width: 100%;
+  }
+
+  .secondary-books,
+  .book-card {
+    grid-template-columns: 1fr;
+  }
+
+  .book-card {
+    text-align: center;
+  }
+
+  .book-card.secondary img {
+    justify-self: center;
+    width: min(220px, 75vw);
   }
 }

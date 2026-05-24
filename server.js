@@ -13,6 +13,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STATIC_DIR = path.join(__dirname, "public");
 const LOCAL_SUBSCRIBERS = path.join(__dirname, "data", "subscribers.json");
 const LOCAL_DOWNLOAD_PATH = "/downloads/meadow-lake-reader-bonus-pack.html";
+const AMAZON_BOOK_1_URL = "https://www.amazon.com/When-Bruised-Hearts-Collide-Meadow-ebook/dp/B0FKTR4P1Z/";
+const AMAZON_BOOK_2_URL = "https://www.amazon.com/When-Bruised-Hearts-Heal-Meadow-ebook/dp/B0GJTZKM6T/";
+const AMAZON_BOOK_3_URL = "https://www.amazon.com/dp/B0H2RLC3JV";
+const AMAZON_SERIES_URL = "https://www.amazon.com/dp/B0GX2VPPSL";
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
@@ -131,10 +135,10 @@ function homePage() {
           <p class="lede">Step into Meadow Lake, where coffee shop beginnings, family bonds, and second chances slowly become home.</p>
           <div class="button-row">
             <a class="button primary" href="/bonus-pack">Get the free bonus pack</a>
-            <a class="button secondary" href="https://www.amazon.com/author/lovern-martindale">Start reading</a>
+            <a class="button secondary" href="${AMAZON_SERIES_URL}">Start reading</a>
           </div>
         </div>
-        <img class="hero-image" src="/assets/series-paperback-mockup.png" alt="Meadow Lake series book mockups">
+        <img class="hero-image" src="/assets/series-mockup-in-coffee-shop.png" alt="Meadow Lake series books displayed in a coffee shop">
       </section>
 
       <section class="band" id="books">
@@ -143,8 +147,10 @@ function homePage() {
           <h2>When Bruised Hearts Collide</h2>
           <p>One forgotten coffee. Two bruised hearts. A small town where healing arrives softly.</p>
         </div>
-        <div class="book-grid">
-          <img src="/assets/book-01-kindle-mockup.png" alt="When Bruised Hearts Collide Kindle mockup">
+        <div class="featured-book">
+          <a href="${AMAZON_BOOK_1_URL}" aria-label="When Bruised Hearts Collide on Amazon">
+            <img src="/assets/book-01-mockup.png" alt="When Bruised Hearts Collide book mockup">
+          </a>
           <div>
             <h3>For readers who love</h3>
             <ul class="check-list">
@@ -154,9 +160,43 @@ function homePage() {
               <li>Family bonds and found family</li>
               <li>Kindle Unlimited reads</li>
             </ul>
-            <a class="button primary" href="https://www.amazon.com/author/lovern-martindale">Visit Amazon author page</a>
+            <a class="button primary" href="${AMAZON_BOOK_1_URL}">Read Book One on Amazon</a>
           </div>
         </div>
+        <div class="secondary-books" aria-label="More Meadow Lake books">
+          <article class="book-card secondary">
+            <a href="${AMAZON_BOOK_2_URL}" aria-label="When Bruised Hearts Heal on Amazon">
+              <img src="/assets/book-02-mockup.png" alt="When Bruised Hearts Heal book mockup">
+            </a>
+            <div>
+              <p class="eyebrow">Book Two</p>
+              <h3>When Bruised Hearts Heal</h3>
+              <a class="text-link" href="${AMAZON_BOOK_2_URL}">View on Amazon</a>
+            </div>
+          </article>
+          <article class="book-card secondary">
+            <a href="${AMAZON_BOOK_3_URL}" aria-label="When Bruised Hearts Grow on Amazon">
+              <img src="/assets/book-03-mockup.png" alt="When Bruised Hearts Grow book mockup">
+            </a>
+            <div>
+              <p class="eyebrow">Book Three</p>
+              <h3>When Bruised Hearts Grow</h3>
+              <a class="text-link" href="${AMAZON_BOOK_3_URL}">View on Amazon</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="series-band">
+        <div class="series-copy">
+          <p class="eyebrow">The Meadow Lake Series</p>
+          <h2>A small town built for bruised hearts and second chances.</h2>
+          <p>Start with the story that began over a forgotten coffee, then stay for the family bonds, quiet healing, and love stories still unfolding in Meadow Lake.</p>
+          <a class="button primary" href="${AMAZON_SERIES_URL}">View the Series on Amazon</a>
+        </div>
+        <a href="${AMAZON_SERIES_URL}" aria-label="Meadow Lake Series on Amazon">
+          <img class="series-image" src="/assets/series-mockup-in-coffee-shop.png" alt="Meadow Lake series book mockup">
+        </a>
       </section>
 
       <section class="author-strip" id="author">
