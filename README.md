@@ -81,6 +81,12 @@ After the first deploy, initialize the database with a Heroku one-off command:
 heroku run npm run db:init --app your-heroku-app
 ```
 
+Apply or update the evergreen campaign emails:
+
+```bash
+heroku run npm run db:seed-campaigns --app your-heroku-app
+```
+
 ## Double Opt-In Flow
 
 1. Reader submits `/bonus-pack`.
@@ -112,6 +118,14 @@ The app supports delayed email sequences through:
 - `email_sends`
 
 The send log uses a unique `send_key`, so if Heroku Scheduler runs twice, the same campaign step is not sent twice to the same subscriber.
+
+The default `welcome` campaign is a 5-email evergreen sequence:
+
+- Day 0: welcome and bonus pack reminder
+- Day 2: Book 1 emotional hook
+- Day 4: Meadow Lake world/setting note
+- Day 7: Book 2 bridge
+- Day 14: review/reader relationship note
 
 Run manually:
 
