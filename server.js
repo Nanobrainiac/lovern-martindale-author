@@ -105,6 +105,19 @@ function nav() {
   </header>`;
 }
 
+function adminNav() {
+  return `<header class="site-header">
+    <a class="brand" href="/admin?token=${encodeURIComponent(config.adminToken)}" aria-label="Admin home">
+      <img src="/assets/lovern-martindale-script-logo-02.png" alt="Lovern Martindale" style="width: 200px; height: auto;">
+    </a>
+    <nav>
+      <a href="/admin?token=${encodeURIComponent(config.adminToken)}">Subscribers</a>
+      <a href="/admin/calendar?token=${encodeURIComponent(config.adminToken)}">Calendar</a>
+      <a href="/">Site</a>
+    </nav>
+  </header>`;
+}
+
 function homePage() {
   return pageShell({
     title: "Lovern Martindale | Meadow Lake Romance",
@@ -469,7 +482,7 @@ async function adminPage(req, res) {
   send(res, 200, pageShell({
     title: "Admin",
     description: "Subscriber admin",
-    body: `${nav()}<main><section class="center-panel"><h1>Subscriber Admin</h1><table class="admin-table"><tbody>${rows}</tbody></table><p><a class="button primary" href="/admin/subscribers.csv?token=${encodeURIComponent(config.adminToken)}">Download CSV</a> <a class="button secondary" href="/admin/calendar?token=${encodeURIComponent(config.adminToken)}">Social Calendar</a></p></section></main>${footer()}`,
+    body: `${adminNav()}<main><section class="center-panel"><h1>Subscriber Admin</h1><table class="admin-table"><tbody>${rows}</tbody></table><p><a class="button primary" href="/admin/subscribers.csv?token=${encodeURIComponent(config.adminToken)}">Download CSV</a> <a class="button secondary" href="/admin/calendar?token=${encodeURIComponent(config.adminToken)}">Social Calendar</a></p></section></main>${footer()}`,
   }));
 }
 
@@ -513,7 +526,7 @@ async function adminCalendar(req, res, day) {
   send(res, 200, pageShell({
     title: "Social Calendar Admin",
     description: "Month 01 social calendar",
-    body: `${nav()}<main class="admin-main">
+    body: `${adminNav()}<main class="admin-main">
       <section class="admin-calendar-shell">
         <div class="admin-heading">
           <p class="eyebrow">Month 01</p>
@@ -623,6 +636,10 @@ async function serveStatic(req, res, pathname) {
       "Content-Type": mimeTypes[ext] || "application/octet-stream",
       "Cache-Control": "public, max-age=3600",
     });
+    if (req.method === "HEAD") {
+      res.end();
+      return;
+    }
     res.end(data);
   } catch {
     send(res, 404, "Not found", "text/plain; charset=utf-8");
@@ -635,6 +652,18 @@ async function router(req, res) {
     const url = new URL(requestUrl, config.baseUrl);
     const pathname = url.pathname.replace(/^\/+/, "/");
 
+    if ((req.method === "GET" || req.method === "HEAD") && pathname === "/styles.css") {
+      await serveStatic(req, res, pathname);
+      return;
+    }
+    if ((req.method === "GET" || req.method === "HEAD") && pathname.startsWith("/assets/")) {
+      await serveStatic(req, res, pathname);
+      return;
+    }
+    if ((req.method === "GET" || req.method === "HEAD") && pathname.startsWith("/downloads/")) {
+      await serveStatic(req, res, pathname);
+      return;
+    }
     if (req.method === "GET" && pathname === "/") {
       send(res, 200, homePage());
       return;
@@ -671,19 +700,6 @@ async function router(req, res) {
       await handleSignup(req, res);
       return;
     }
-    if (req.method === "GET" && pathname === "/styles.css") {
-      await serveStatic(req, res, pathname);
-      return;
-    }
-    if (req.method === "GET" && pathname.startsWith("/assets/")) {
-      await serveStatic(req, res, pathname);
-      return;
-    }
-    if (req.method === "GET" && pathname.startsWith("/downloads/")) {
-      await serveStatic(req, res, pathname);
-      return;
-    }
-
     redirect(res, "/");
   } catch (error) {
     console.error(error);
