@@ -75,6 +75,7 @@ CROSS JOIN (
         <p>It shows up in coffee remembered after a hard morning. In a porch swing when the evening gets too quiet. In family meals, familiar roads, dogs who make a house feel less empty, and friends who tell the truth gently.</p>
         <p>That is the heart of this series: not perfect people finding perfect love, but bruised hearts learning that home can still be trusted.</p>
         <p>If you have started reading, I hope you are finding those little places to rest inside the story.</p>
+        <p>When you are ready for more Meadow Lake, <a href="https://www.amazon.com/author/lovern-martindale">visit Lovern Martindale's Amazon author page</a>.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
@@ -104,6 +105,7 @@ CROSS JOIN (
         <p>Reader support is what helps quiet, emotional books find the people who need them. A short review, an Amazon author follow, or a recommendation to a friend can make a real difference.</p>
         <p>It does not have to be long. Even a simple note like "warm emotional small-town romance" or "loved the healing and family warmth" helps the right readers recognize their kind of book.</p>
         <p>And if you are still reading, no rush. Meadow Lake is best taken at the pace your heart wants.</p>
+        <p>You can also <a href="https://www.amazon.com/author/lovern-martindale">follow Lovern Martindale on Amazon</a> so new Meadow Lake books are easier to find.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
