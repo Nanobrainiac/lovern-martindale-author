@@ -377,38 +377,6 @@ fieldset {
 
 @media (max-width: 860px) {
   .site-header {
-    align-items: flex-start;
-    gap: 14px;
-  }
-
-  nav {
-    gap: 12px;
-  }
-
-  .hero,
-  .signup-hero,
-  .book-grid,
-  .author-strip,
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero,
-  .signup-hero {
-    min-height: auto;
-  }
-
-  .author-strip {
-    text-align: center;
-  }
-
-  .author-strip img {
-    justify-self: center;
-  }
-}
-
-@media (max-width: 560px) {
-  .site-header {
     align-items: center;
     flex-direction: column;
     gap: 10px;
@@ -434,6 +402,29 @@ fieldset {
     padding-top: 112px;
   }
 
+  .hero,
+  .signup-hero,
+  .book-grid,
+  .author-strip,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero,
+  .signup-hero {
+    min-height: auto;
+  }
+
+  .author-strip {
+    text-align: center;
+  }
+
+  .author-strip img {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 560px) {
   h1 {
     font-size: 40px;
   }
