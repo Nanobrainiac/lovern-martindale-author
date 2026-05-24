@@ -9,6 +9,7 @@
     "db:init": "node scripts/init-db.js",
     "db:seed-campaigns": "node scripts/seed-campaigns.js",
     "db:seed-social": "node scripts/seed-social-calendar.js",
+    "db:seed-social-content": "node scripts/seed-social-content.js",
     "send:scheduled": "node scripts/send-scheduled.js"
   },
   "engines": {
