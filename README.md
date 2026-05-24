@@ -38,24 +38,24 @@ Without `DATABASE_URL`, signups are stored in `data/subscribers.json` for local 
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` for local reference. Heroku config vars should include:
+Copy `.env.example` to `.env` for local reference. Heroku config vars should include the following names. Do not commit real values.
 
 ```text
 BASE_URL=https://your-heroku-app.herokuapp.com
-DATABASE_URL=postgresql://USER:PASSWORD@HOST.neon.tech/DBNAME?sslmode=require
-FROM_EMAIL=Lovern Martindale <info@lovernmartindale.com>
-ADMIN_TOKEN=change-me-long-random-token
-AWS_REGION=us-east-2
-AWS_ACCESS_KEY_ID=...
-AWS_SECRET_ACCESS_KEY=...
-S3_BUCKET=lovern-martindale-bucket
-BONUS_PACK_S3_KEY=meadow-lake-reader-bonus-pack.pdf
+DATABASE_URL=<neon-postgres-connection-string>
+FROM_EMAIL=<verified-ses-from-email>
+ADMIN_TOKEN=<long-random-token>
+AWS_REGION=<aws-region>
+AWS_ACCESS_KEY_ID=<aws-access-key-id>
+AWS_SECRET_ACCESS_KEY=<aws-secret-access-key>
+S3_BUCKET=<private-s3-bucket-name>
+BONUS_PACK_S3_KEY=<bonus-pack-object-key>
 S3_SIGNED_URL_EXPIRES_SECONDS=3600
 CONFIRMATION_TOKEN_DAYS=30
 PGSSLMODE=require
 ```
 
-SES and S3 are both configured for `us-east-2` per project requirements.
+SES and S3 must use the same region configured in Heroku.
 
 ## Neon Database Setup
 
@@ -73,20 +73,12 @@ heroku run npm run db:init --app your-heroku-app
 
 ## Heroku Setup
 
+Create the Heroku app, add the config vars listed above in the Heroku dashboard, connect the GitHub repo, and deploy the `main` branch.
+
+After the first deploy, initialize the database with a Heroku one-off command:
+
 ```bash
-heroku create your-heroku-app
-heroku config:set BASE_URL=https://your-heroku-app.herokuapp.com
-heroku config:set DATABASE_URL="postgresql://USER:PASSWORD@HOST.neon.tech/DBNAME?sslmode=require"
-heroku config:set PGSSLMODE=require
-heroku config:set FROM_EMAIL="Lovern Martindale <info@lovernmartindale.com>"
-heroku config:set ADMIN_TOKEN="long-random-token"
-heroku config:set AWS_REGION=us-east-2
-heroku config:set AWS_ACCESS_KEY_ID="..."
-heroku config:set AWS_SECRET_ACCESS_KEY="..."
-heroku config:set S3_BUCKET="lovern-martindale-bucket"
-heroku config:set BONUS_PACK_S3_KEY="meadow-lake-reader-bonus-pack.pdf"
-git push heroku main
-heroku run npm run db:init
+heroku run npm run db:init --app your-heroku-app
 ```
 
 ## Double Opt-In Flow
@@ -102,13 +94,13 @@ heroku run npm run db:init
 
 The lead magnet file should be private in S3.
 
-The app generates a short-lived signed URL on confirmation. Upload the file to:
+The app generates a short-lived signed URL on confirmation. Upload the file to the private bucket and set `S3_BUCKET` plus `BONUS_PACK_S3_KEY` to match that object.
 
 ```text
-s3://YOUR_BUCKET/lead-magnets/meadow-lake-reader-bonus-pack.pdf
+s3://<private-s3-bucket-name>/<bonus-pack-object-key>
 ```
 
-or change `BONUS_PACK_S3_KEY`.
+Do not commit the real bucket name if the repository is public.
 
 ## Scheduled Campaigns
 
