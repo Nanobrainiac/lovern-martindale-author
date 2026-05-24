@@ -276,15 +276,9 @@ async function saveSubscriber(subscriber) {
         campaign = EXCLUDED.campaign,
         format_interest = EXCLUDED.format_interest,
         trope_interest = EXCLUDED.trope_interest,
-        confirmation_token_hash = CASE
-          WHEN subscribers.status = 'confirmed' THEN subscribers.confirmation_token_hash
-          ELSE EXCLUDED.confirmation_token_hash
-        END,
+        confirmation_token_hash = EXCLUDED.confirmation_token_hash,
         confirmation_sent_at = NOW(),
-        confirmation_expires_at = CASE
-          WHEN subscribers.status = 'confirmed' THEN subscribers.confirmation_expires_at
-          ELSE EXCLUDED.confirmation_expires_at
-        END,
+        confirmation_expires_at = EXCLUDED.confirmation_expires_at,
         user_agent = EXCLUDED.user_agent,
         ip_hash = EXCLUDED.ip_hash,
         updated_at = NOW()
