@@ -542,7 +542,7 @@ async function serveStatic(req, res, pathname) {
 async function router(req, res) {
   try {
     const url = new URL(req.url || "/", config.baseUrl);
-    const pathname = url.pathname;
+    const pathname = url.pathname.replace(/^\/+/, "/");
 
     if (req.method === "GET" && pathname === "/") {
       send(res, 200, homePage());
