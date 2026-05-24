@@ -66,9 +66,35 @@ CREATE TABLE IF NOT EXISTS email_sends (
   sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS social_posts (
+  id BIGSERIAL PRIMARY KEY,
+  campaign_month TEXT NOT NULL,
+  day_number INTEGER NOT NULL,
+  platform TEXT NOT NULL,
+  post_type TEXT NOT NULL,
+  campaign_angle TEXT NOT NULL,
+  cta TEXT,
+  asset_required TEXT,
+  audio_required TEXT,
+  posting_time TEXT,
+  attribution_campaign TEXT,
+  status TEXT NOT NULL DEFAULT 'planned',
+  post_text TEXT,
+  hashtags TEXT,
+  asset_s3_key TEXT,
+  asset_url TEXT,
+  video_s3_key TEXT,
+  video_url TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE (campaign_month, day_number, platform, post_type, attribution_campaign)
+);
+
 CREATE INDEX IF NOT EXISTS idx_subscribers_campaign ON subscribers (campaign);
 CREATE INDEX IF NOT EXISTS idx_subscribers_source_platform ON subscribers (source_platform);
 CREATE INDEX IF NOT EXISTS idx_subscribers_status ON subscribers (status);
 CREATE INDEX IF NOT EXISTS idx_subscribers_created_at ON subscribers (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_email_sends_send_key ON email_sends (send_key);
 CREATE INDEX IF NOT EXISTS idx_email_sends_subscriber ON email_sends (subscriber_id);
+CREATE INDEX IF NOT EXISTS idx_social_posts_month_day ON social_posts (campaign_month, day_number);
+CREATE INDEX IF NOT EXISTS idx_social_posts_platform ON social_posts (platform);

@@ -469,8 +469,103 @@ async function adminPage(req, res) {
   send(res, 200, pageShell({
     title: "Admin",
     description: "Subscriber admin",
-    body: `${nav()}<main><section class="center-panel"><h1>Subscriber Admin</h1><table class="admin-table"><tbody>${rows}</tbody></table><p><a class="button primary" href="/admin/subscribers.csv?token=${encodeURIComponent(config.adminToken)}">Download CSV</a></p></section></main>${footer()}`,
+    body: `${nav()}<main><section class="center-panel"><h1>Subscriber Admin</h1><table class="admin-table"><tbody>${rows}</tbody></table><p><a class="button primary" href="/admin/subscribers.csv?token=${encodeURIComponent(config.adminToken)}">Download CSV</a> <a class="button secondary" href="/admin/calendar?token=${encodeURIComponent(config.adminToken)}">Social Calendar</a></p></section></main>${footer()}`,
   }));
+}
+
+async function adminCalendar(req, res, day) {
+  if (!isAdmin(req)) {
+    send(res, 401, "Unauthorized", "text/plain; charset=utf-8");
+    return;
+  }
+  if (!pool) {
+    send(res, 500, "DATABASE_URL is required for admin.", "text/plain; charset=utf-8");
+    return;
+  }
+
+  const selectedDay = Math.max(1, Math.min(30, Number(day || 1)));
+  const counts = await pool.query(
+    `SELECT day_number, COUNT(*)::int AS count
+     FROM social_posts
+     WHERE campaign_month = 'month-01'
+     GROUP BY day_number
+     ORDER BY day_number`
+  );
+  const posts = await pool.query(
+    `SELECT *
+     FROM social_posts
+     WHERE campaign_month = 'month-01' AND day_number = $1
+     ORDER BY posting_time, platform`,
+    [selectedDay]
+  );
+
+  const countByDay = new Map(counts.rows.map((row) => [row.day_number, row.count]));
+  const days = Array.from({ length: 30 }, (_, index) => {
+    const dayNumber = index + 1;
+    const active = dayNumber === selectedDay ? " active" : "";
+    return `<a class="calendar-day${active}" href="/admin/calendar?token=${encodeURIComponent(config.adminToken)}&day=${dayNumber}">
+      <strong>${dayNumber}</strong><span>${countByDay.get(dayNumber) || 0} posts</span>
+    </a>`;
+  }).join("");
+
+  const postCards = posts.rows.map((post) => adminPostCard(post)).join("") || "<p>No posts planned for this day.</p>";
+
+  send(res, 200, pageShell({
+    title: "Social Calendar Admin",
+    description: "Month 01 social calendar",
+    body: `${nav()}<main class="admin-main">
+      <section class="admin-calendar-shell">
+        <div class="admin-heading">
+          <p class="eyebrow">Month 01</p>
+          <h1>Social Calendar</h1>
+          <p>Click a day to view planned posts. Use copy buttons for text, asset keys, and links.</p>
+        </div>
+        <div class="calendar-layout">
+          <div class="calendar-grid">${days}</div>
+          <div class="day-panel">
+            <h2>Day ${selectedDay}</h2>
+            <div class="post-stack">${postCards}</div>
+          </div>
+        </div>
+      </section>
+    </main>${footer()}${copyScript()}`,
+  }));
+}
+
+function adminPostCard(post) {
+  const text = post.post_text || post.campaign_angle;
+  const asset = post.asset_url || post.asset_s3_key || post.asset_required || "";
+  const video = post.video_url || post.video_s3_key || "";
+  return `<article class="admin-post-card">
+    <div class="post-meta">
+      <span>${escapeHtml(post.platform)}</span>
+      <span>${escapeHtml(post.posting_time || "Time TBD")}</span>
+      <span>${escapeHtml(post.status)}</span>
+    </div>
+    <h3>${escapeHtml(post.post_type)}</h3>
+    <p><strong>Angle:</strong> ${escapeHtml(post.campaign_angle)}</p>
+    <p><strong>CTA:</strong> ${escapeHtml(post.cta || "")}</p>
+    <label>Text <button class="copy-mini" data-copy="${escapeHtml(text)}" type="button">Copy</button></label>
+    <textarea readonly>${escapeHtml(text)}</textarea>
+    <label>Asset <button class="copy-mini" data-copy="${escapeHtml(asset)}" type="button">Copy</button></label>
+    <input readonly value="${escapeHtml(asset)}">
+    <label>Video <button class="copy-mini" data-copy="${escapeHtml(video)}" type="button">Copy</button></label>
+    <input readonly value="${escapeHtml(video)}">
+    <p class="small-admin"><strong>Attribution:</strong> ${escapeHtml(post.attribution_campaign || "")}</p>
+  </article>`;
+}
+
+function copyScript() {
+  return `<script>
+    document.addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-copy]");
+      if (!button) return;
+      await navigator.clipboard.writeText(button.dataset.copy || "");
+      const old = button.textContent;
+      button.textContent = "Copied";
+      setTimeout(() => { button.textContent = old; }, 1000);
+    });
+  </script>`;
 }
 
 async function adminCsv(req, res) {
@@ -562,6 +657,10 @@ async function router(req, res) {
     }
     if (req.method === "GET" && pathname === "/admin") {
       await adminPage(req, res);
+      return;
+    }
+    if (req.method === "GET" && pathname === "/admin/calendar") {
+      await adminCalendar(req, res, url.searchParams.get("day"));
       return;
     }
     if (req.method === "GET" && pathname === "/admin/subscribers.csv") {

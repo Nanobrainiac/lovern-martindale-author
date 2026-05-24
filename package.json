@@ -8,6 +8,7 @@
     "dev": "node --watch server.js",
     "db:init": "node scripts/init-db.js",
     "db:seed-campaigns": "node scripts/seed-campaigns.js",
+    "db:seed-social": "node scripts/seed-social-calendar.js",
     "send:scheduled": "node scripts/send-scheduled.js"
   },
   "engines": {

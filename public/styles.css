@@ -375,6 +375,121 @@ fieldset {
   margin-bottom: 8px;
 }
 
+.admin-main {
+  overflow: visible;
+}
+
+.admin-calendar-shell {
+  padding: clamp(36px, 6vw, 70px) clamp(18px, 5vw, 72px);
+}
+
+.admin-heading {
+  margin: 0 auto 28px;
+  max-width: 920px;
+}
+
+.admin-heading p,
+.small-admin {
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+}
+
+.calendar-layout {
+  align-items: start;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(260px, 380px) minmax(0, 1fr);
+  margin: 0 auto;
+  max-width: 1180px;
+}
+
+.calendar-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.calendar-day {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  display: grid;
+  font-family: Arial, sans-serif;
+  min-height: 68px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.calendar-day span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.calendar-day.active {
+  background: #f4dedb;
+  border-color: var(--rose);
+}
+
+.day-panel {
+  min-width: 0;
+}
+
+.post-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-post-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.post-meta span,
+.copy-mini {
+  background: #d8f0f2;
+  border: 0;
+  border-radius: 999px;
+  color: var(--teal-dark);
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 10px;
+}
+
+.admin-post-card label {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0 6px;
+}
+
+.admin-post-card textarea,
+.admin-post-card input {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font: 14px Arial, sans-serif;
+  padding: 10px;
+  width: 100%;
+}
+
+.admin-post-card textarea {
+  min-height: 86px;
+  resize: vertical;
+}
+
 @media (max-width: 860px) {
   .site-header {
     align-items: center;
@@ -406,7 +521,8 @@ fieldset {
   .signup-hero,
   .book-grid,
   .author-strip,
-  .feature-grid {
+  .feature-grid,
+  .calendar-layout {
     grid-template-columns: 1fr;
   }
 
