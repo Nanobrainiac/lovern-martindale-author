@@ -94,7 +94,7 @@ function pageShell({ title, description, body, extraClass = "" }) {
 function nav() {
   return `<header class="site-header">
     <a class="brand" href="/" aria-label="Lovern Martindale home">
-      <img src="/assets/lovern-martindale-script-logo.png" alt="Lovern Martindale">
+      <img src="/assets/lovern-martindale-script-logo.png" alt="Lovern Martindale" style="width: 200px; height: auto;">
     </a>
     <nav>
       <a href="/#books">Books</a>
