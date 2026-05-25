@@ -225,6 +225,7 @@ function bonusPackPage(query = {}) {
         <div class="signup-copy">
           <p class="eyebrow">Free reader bonus</p>
           <h1>Free Meadow Lake Reader Bonus Pack</h1>
+          <img class="bonus-pack-preview" src="/assets/bonus-pack-sneak-peek.png" alt="Preview of the Meadow Lake Reader Bonus Pack pages">
           <p class="lede">For readers who love emotional small-town romance, coffee shop beginnings, family bonds, wounded hearts, and second chances that heal slowly.</p>
           <ul class="check-list compact">
             <li>Meadow Lake series reading guide</li>

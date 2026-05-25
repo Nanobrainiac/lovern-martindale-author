@@ -320,6 +320,14 @@ h3 {
   grid-template-columns: minmax(0, 1fr) minmax(320px, 450px);
 }
 
+.bonus-pack-preview {
+  display: block;
+  filter: drop-shadow(0 26px 34px rgba(63, 34, 36, 0.14));
+  margin: 18px 0 26px;
+  max-width: min(640px, 100%);
+  width: 100%;
+}
+
 .signup-card {
   background: var(--cream);
   border: 1px solid var(--line);
