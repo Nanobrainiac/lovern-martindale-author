@@ -17,6 +17,33 @@ const AMAZON_BOOK_1_URL = "https://www.amazon.com/When-Bruised-Hearts-Collide-Me
 const AMAZON_BOOK_2_URL = "https://www.amazon.com/When-Bruised-Hearts-Heal-Meadow-ebook/dp/B0GJTZKM6T/";
 const AMAZON_BOOK_3_URL = "https://www.amazon.com/dp/B0H2RLC3JV";
 const AMAZON_SERIES_URL = "https://www.amazon.com/dp/B0GX2VPPSL";
+const GOODREADS_AUTHOR_URL = "https://www.goodreads.com/lovernmartindale";
+const REVIEW_BOOKS = [
+  {
+    number: "Book One",
+    title: "When Bruised Hearts Collide",
+    amazonReviewUrl: "https://www.amazon.com/review/create-review?asin=B0FKTR4P1Z",
+    goodreadsUrl: "https://www.goodreads.com/book/show/239988846-when-bruised-hearts-collide",
+    storygraphUrl: "https://app.thestorygraph.com/books/9b42a976-7813-4e7a-b1b4-56c588fd7cfb",
+    romanceUrl: "https://www.romance.io/books/6a193d77b87904ae23298fbf/when-bruised-hearts-collide-lovern-martindale",
+  },
+  {
+    number: "Book Two",
+    title: "When Bruised Hearts Heal",
+    amazonReviewUrl: "https://www.amazon.com/review/create-review?asin=B0GJTZKM6T",
+    goodreadsUrl: "https://www.goodreads.com/book/show/247136684-when-bruised-hearts-heal",
+    storygraphUrl: "https://app.thestorygraph.com/books/255fdde8-4301-43a8-8dd9-c5a423f72dec",
+    romanceUrl: "https://www.romance.io/books/6a193d83b87904ae23298fe3/when-bruised-hearts-heal-lovern-martindale",
+  },
+  {
+    number: "Book Three",
+    title: "When Bruised Hearts Grow",
+    amazonReviewUrl: "https://www.amazon.com/review/create-review?asin=B0H2RLC3JV",
+    goodreadsUrl: "https://www.goodreads.com/book/show/252628456-when-bruised-hearts-grow",
+    storygraphUrl: "",
+    romanceUrl: "https://www.romance.io/books/6a129d5a354976dfbde0faa2/when-bruised-hearts-grow-lovern-martindale",
+  },
+];
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
@@ -205,6 +232,63 @@ function homePage() {
           <p class="eyebrow">The author</p>
           <h2>Lovern Martindale</h2>
           <p>Lovern writes warm, heartfelt romance centered on grief, family, coffee, home, and the kind of love that gives wounded hearts room to heal.</p>
+        </div>
+      </section>
+    </main>
+    ${footer()}`,
+  });
+}
+
+function reviewBookCard(book) {
+  const storyGraphLink = book.storygraphUrl
+    ? `<a class="button secondary" href="${book.storygraphUrl}">Add on StoryGraph</a>`
+    : "";
+  return `<article class="review-card">
+    <p class="eyebrow">${book.number}</p>
+    <h3>${escapeHtml(book.title)}</h3>
+    <p>If this story stayed with you, a short honest review helps other emotional romance readers decide whether Meadow Lake is their kind of place.</p>
+    <div class="review-actions">
+      <a class="button primary" href="${book.amazonReviewUrl}">Review on Amazon</a>
+      <a class="button secondary" href="${book.goodreadsUrl}">Review on Goodreads</a>
+      ${storyGraphLink}
+      <a class="button secondary" href="${book.romanceUrl}">Rate on Romance.io</a>
+    </div>
+  </article>`;
+}
+
+function reviewsPage() {
+  return pageShell({
+    title: "Leave a Review | Lovern Martindale",
+    description: "Review the Meadow Lake romance books by Lovern Martindale.",
+    body: `${nav()}
+    <main>
+      <section class="center-panel review-intro">
+        <p class="eyebrow">Reader kindness</p>
+        <h1>Review Meadow Lake</h1>
+        <p>If Meadow Lake found a place in your heart, an honest review helps other readers find the series too.</p>
+        <p>Your note does not have to be long. A few real words about the emotion, the family warmth, or the small-town feeling can make a meaningful difference.</p>
+      </section>
+
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Choose a book</p>
+          <h2>Leave an honest review or add the book to your shelf.</h2>
+          <p>Reviews are always appreciated, never required. Please share only your honest reaction.</p>
+        </div>
+        <div class="review-grid">
+          ${REVIEW_BOOKS.map(reviewBookCard).join("")}
+        </div>
+      </section>
+
+      <section class="band soft">
+        <div class="section-heading">
+          <p class="eyebrow">Not sure what to write?</p>
+          <h2>Simple notes help.</h2>
+          <p>You can mention the mood, the characters, the small-town setting, Kindle Unlimited, family bonds, healing, or the kind of reader you think would love the book.</p>
+          <div class="button-row centered">
+            <a class="button primary" href="${AMAZON_SERIES_URL}">Continue the Series</a>
+            <a class="button secondary" href="${GOODREADS_AUTHOR_URL}">Follow on Goodreads</a>
+          </div>
         </div>
       </section>
     </main>
@@ -711,6 +795,10 @@ async function router(req, res) {
     }
     if (req.method === "GET" && pathname === "/bonus-pack") {
       send(res, 200, bonusPackPage(Object.fromEntries(url.searchParams.entries())));
+      return;
+    }
+    if (req.method === "GET" && pathname === "/reviews") {
+      send(res, 200, reviewsPage());
       return;
     }
     if (req.method === "GET" && pathname === "/thank-you") {

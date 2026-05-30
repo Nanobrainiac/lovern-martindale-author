@@ -6,6 +6,7 @@ Minimal Node.js author site for Lovern Martindale, designed for Heroku deploymen
 
 - Public author home page
 - Lead magnet landing page at `/bonus-pack`
+- Review links page at `/reviews`
 - Signup form with attribution fields
 - Neon/Postgres subscriber storage through `DATABASE_URL`
 - Local JSON fallback for development when `DATABASE_URL` is not set
@@ -119,13 +120,14 @@ The app supports delayed email sequences through:
 
 The send log uses a unique `send_key`, so if Heroku Scheduler runs twice, the same campaign step is not sent twice to the same subscriber.
 
-The default `welcome` campaign is a 5-email evergreen sequence:
+The default `welcome` campaign is a 6-email evergreen sequence:
 
 - Day 0: welcome and bonus pack reminder
 - Day 2: Book 1 emotional hook
 - Day 4: Meadow Lake world/setting note
 - Day 7: Book 2 bridge
 - Day 14: review/reader relationship note
+- Day 21: Book 3/read-through bridge
 
 Run manually:
 

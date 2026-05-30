@@ -399,6 +399,43 @@ fieldset {
   padding: 26px;
 }
 
+.review-intro {
+  min-height: auto;
+}
+
+.review-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 1120px;
+}
+
+.review-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+}
+
+.review-card p {
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+}
+
+.review-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.review-actions .button {
+  width: 100%;
+}
+
 .center-panel {
   margin: 0 auto;
   max-width: 760px;
@@ -580,6 +617,7 @@ fieldset {
   .featured-book,
   .author-strip,
   .feature-grid,
+  .review-grid,
   .calendar-layout,
   .series-band {
     grid-template-columns: 1fr;

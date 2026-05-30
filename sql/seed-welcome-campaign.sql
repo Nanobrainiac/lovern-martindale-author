@@ -2,7 +2,7 @@ INSERT INTO campaigns (slug, name, description, active)
 VALUES (
   'welcome',
   'Meadow Lake Welcome Sequence',
-  'Evergreen 5-email onboarding sequence for confirmed bonus pack subscribers.',
+  'Evergreen 6-email onboarding sequence for confirmed bonus pack subscribers.',
   TRUE
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -37,13 +37,13 @@ CROSS JOIN (
       'day-0-welcome',
       0,
       'Welcome to Meadow Lake',
-      'Your bonus pack is ready, and this is your soft place to start.',
+      'Your bonus pack is ready, and Book 1 is the soft place to start.',
       $email$
         <p>Hi {{first_name}},</p>
         <p>I am so glad you are here.</p>
         <p>Your Meadow Lake Reader Bonus Pack is ready whenever you want to open it again: <a href="{{bonus_pack_url}}">download the bonus pack</a>.</p>
         <p>Meadow Lake is built for readers who love emotional small-town romance: coffee on a rushed morning, families who show up, quiet grief, patient love, and second chances that feel earned.</p>
-        <p>If you are new to the series, start with <a href="https://www.amazon.com/When-Bruised-Hearts-Collide-Meadow-ebook/dp/B0FKTR4P1Z/"><em>When Bruised Hearts Collide</em></a>. It begins with Sylvie Charles, Rhys Anderson, and one ordinary forgotten coffee that changes more than either of them expects.</p>
+        <p>If you are new to the series, start with <a href="https://www.amazon.com/When-Bruised-Hearts-Collide-Meadow-ebook/dp/B0FKTR4P1Z?maas=maas_adg_3CB401682915C973F4EBBFB510B19CD5_afap_abs&amp;ref_=aa_maas&amp;tag=maas"><em>When Bruised Hearts Collide</em></a>. It begins with Sylvie Charles, Rhys Anderson, and one ordinary forgotten coffee that changes more than either of them expects.</p>
         <p>Warmly,<br>Lovern Martindale</p>
         <p style="font-size:13px;color:#735b57;">You are receiving this because you requested the Meadow Lake Reader Bonus Pack. You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
@@ -59,7 +59,7 @@ CROSS JOIN (
         <p>Some begin with a woman trying to keep herself together, a man who notices more than she expects, and a coffee she meant to remember.</p>
         <p>That is the doorway into <em>When Bruised Hearts Collide</em>, the first Meadow Lake romance. Sylvie Charles is carrying a grief she does not advertise. Rhys Anderson owns the kind of cafe where ordinary mornings can become turning points.</p>
         <p>This book is for readers who love wounded characters, small-town warmth, emotional restraint, dogs underfoot, and love that feels safest when it starts quietly.</p>
-        <p>If that sounds like your kind of comfort read, <a href="https://www.amazon.com/When-Bruised-Hearts-Collide-Meadow-ebook/dp/B0FKTR4P1Z/">start <em>When Bruised Hearts Collide</em> on Amazon</a>.</p>
+        <p>If that sounds like your kind of comfort read, <a href="https://www.amazon.com/When-Bruised-Hearts-Collide-Meadow-ebook/dp/B0FKTR4P1Z?maas=maas_adg_3CB401682915C973F4EBBFB510B19CD5_afap_abs&amp;ref_=aa_maas&amp;tag=maas">start <em>When Bruised Hearts Collide</em> on Amazon or read free with Kindle Unlimited</a>.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
@@ -74,8 +74,7 @@ CROSS JOIN (
         <p>One of my favorite things about Meadow Lake is that love does not only show up in the big dramatic moments.</p>
         <p>It shows up in coffee remembered after a hard morning. In a porch swing when the evening gets too quiet. In family meals, familiar roads, dogs who make a house feel less empty, and friends who tell the truth gently.</p>
         <p>That is the heart of this series: not perfect people finding perfect love, but bruised hearts learning that home can still be trusted.</p>
-        <p>If you have started reading, I hope you are finding those little places to rest inside the story.</p>
-        <p>When you are ready for more Meadow Lake, <a href="https://www.amazon.com/author/lovern-martindale">visit Lovern Martindale's Amazon author page</a>.</p>
+        <p>If you have started reading, I hope you are finding those little places to rest inside the story. If Book 1 is still waiting for you, Meadow Lake will be there when you are ready.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
@@ -89,7 +88,7 @@ CROSS JOIN (
         <p>Hi {{first_name}},</p>
         <p>If <em>When Bruised Hearts Collide</em> is about the ordinary moment that opens a door, <em>When Bruised Hearts Heal</em> is about what happens when staying becomes its own kind of courage.</p>
         <p>Camille Jordan and Theo Beckett bring a different ache to Meadow Lake. Their story carries creative work, business pressure, family warmth, romantic hesitation, and the quiet question underneath so many healing romances: what if love does not fix you, but gives you room to become whole?</p>
-        <p>You do not need spoilers to know whether this one is for you. If you love patient tension, soft hope after hard seasons, and a town full of people who keep pulling each other back toward home, <a href="https://www.amazon.com/When-Bruised-Hearts-Heal-Meadow-ebook/dp/B0GJTZKM6T/">Book 2 belongs on your list</a>.</p>
+        <p>You do not need spoilers to know whether this one is for you. If you love patient tension, soft hope after hard seasons, and a town full of people who keep pulling each other back toward home, <a href="https://www.amazon.com/When-Bruised-Hearts-Heal-Meadow-ebook/dp/B0GJTZKM6T?maas=maas_adg_930E2EA670DB7702CFE2C375D538D5E3_afap_abs&amp;ref_=aa_maas&amp;tag=maas">Book 2 belongs on your list</a>.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
@@ -101,11 +100,25 @@ CROSS JOIN (
       'Reviews help other emotional romance readers find the series.',
       $email$
         <p>Hi {{first_name}},</p>
-        <p>If you have spent time in Meadow Lake already, thank you.</p>
-        <p>Reader support is what helps quiet, emotional books find the people who need them. A short review, an Amazon author follow, or a recommendation to a friend can make a real difference.</p>
+        <p>If you have started or finished a Meadow Lake book already, thank you.</p>
+        <p>Reader support is what helps quiet, emotional books find the people who need them. A short honest review, a shelf add, an Amazon author follow, or a recommendation to a friend can make a real difference.</p>
         <p>It does not have to be long. Even a simple note like "warm emotional small-town romance" or "loved the healing and family warmth" helps the right readers recognize their kind of book.</p>
+        <p>If you feel comfortable leaving one, I made a simple page with the main review links here: <a href="https://www.lovernmartindale.com/reviews">review Meadow Lake</a>.</p>
         <p>And if you are still reading, no rush. Meadow Lake is best taken at the pace your heart wants.</p>
-        <p>You can also <a href="https://www.amazon.com/author/lovern-martindale">follow Lovern Martindale on Amazon</a> so new Meadow Lake books are easier to find.</p>
+        <p>Warmly,<br>Lovern</p>
+        <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
+      $email$
+    ),
+    (
+      'day-21-book-3',
+      21,
+      'One more Meadow Lake heart learning how to grow',
+      'A gentle bridge into Wesley and Emily''s story.',
+      $email$
+        <p>Hi {{first_name}},</p>
+        <p>By the time readers reach <em>When Bruised Hearts Grow</em>, Meadow Lake has become more than one romance. It has become a family, a town, and a place where love keeps asking people to become a little braver.</p>
+        <p>Wesley Charles and Emily carry that next part of the series with quiet steadiness, family ties, long-distance pressure, work that matters, and the question of where home really belongs.</p>
+        <p>If you are ready to continue the series, <a href="https://www.amazon.com/When-Bruised-Hearts-Grow-Meadow-ebook/dp/B0H2RLC3JV?maas=maas_adg_CC36F239C7B271277249E7799AA54E86_afap_abs&amp;ref_=aa_maas&amp;tag=maas">Book 3 is waiting for you here</a>.</p>
         <p>Warmly,<br>Lovern</p>
         <p style="font-size:13px;color:#735b57;">You can <a href="{{unsubscribe_url}}">unsubscribe here</a>.</p>
       $email$
