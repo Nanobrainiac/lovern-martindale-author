@@ -123,10 +123,26 @@ function pageShell({ title, description, body, extraClass = "" }) {
 </html>`;
 }
 
+function optimizedImage({ src, webp, alt, className = "", width, height, loading = "lazy", fetchPriority = "" }) {
+  const classAttr = className ? ` class="${escapeHtml(className)}"` : "";
+  const fetchPriorityAttr = fetchPriority ? ` fetchpriority="${escapeHtml(fetchPriority)}"` : "";
+  return `<picture>
+        <source srcset="${webp}" type="image/webp">
+        <img${classAttr} src="${src}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="${loading}" decoding="async"${fetchPriorityAttr}>
+      </picture>`;
+}
+
 function nav() {
   return `<header class="site-header">
     <a class="brand" href="/" aria-label="Lovern Martindale home">
-      <img src="/assets/lovern-martindale-script-logo-02.png" alt="Lovern Martindale" style="width: 200px; height: auto;">
+      ${optimizedImage({
+        src: "/assets/lovern-martindale-script-logo-02.png",
+        webp: "/assets/lovern-martindale-script-logo-02-web.webp",
+        alt: "Lovern Martindale",
+        width: 400,
+        height: 94,
+        loading: "eager",
+      })}
     </a>
     <nav>
       <a href="/#books">Books</a>
@@ -139,7 +155,14 @@ function nav() {
 function adminNav() {
   return `<header class="site-header">
     <a class="brand" href="/admin?token=${encodeURIComponent(config.adminToken)}" aria-label="Admin home">
-      <img src="/assets/lovern-martindale-script-logo-02.png" alt="Lovern Martindale" style="width: 200px; height: auto;">
+      ${optimizedImage({
+        src: "/assets/lovern-martindale-script-logo-02.png",
+        webp: "/assets/lovern-martindale-script-logo-02-web.webp",
+        alt: "Lovern Martindale",
+        width: 400,
+        height: 94,
+        loading: "eager",
+      })}
     </a>
     <nav>
       <a href="/admin?token=${encodeURIComponent(config.adminToken)}">Subscribers</a>
@@ -165,7 +188,16 @@ function homePage() {
             <a class="button secondary" href="${AMAZON_SERIES_URL}">Start reading</a>
           </div>
         </div>
-        <img class="hero-image" src="/assets/series-mockup-in-coffee-shop.png" alt="Meadow Lake series books displayed in a coffee shop">
+        ${optimizedImage({
+          src: "/assets/series-mockup-in-coffee-shop.png",
+          webp: "/assets/series-mockup-in-coffee-shop-web.webp",
+          alt: "Meadow Lake series books displayed in a coffee shop",
+          className: "hero-image",
+          width: 1040,
+          height: 693,
+          loading: "eager",
+          fetchPriority: "high",
+        })}
       </section>
 
       <section class="band" id="books">
@@ -176,7 +208,13 @@ function homePage() {
         </div>
         <div class="featured-book">
           <a href="${AMAZON_BOOK_1_URL}" aria-label="When Bruised Hearts Collide on Amazon">
-            <img src="/assets/book-01-mockup.png" alt="When Bruised Hearts Collide book mockup">
+            ${optimizedImage({
+              src: "/assets/book-01-mockup.png",
+              webp: "/assets/book-01-mockup-web.webp",
+              alt: "When Bruised Hearts Collide book mockup",
+              width: 840,
+              height: 560,
+            })}
           </a>
           <div>
             <h3>For readers who love</h3>
@@ -193,7 +231,13 @@ function homePage() {
         <div class="secondary-books" aria-label="More Meadow Lake books">
           <article class="book-card secondary">
             <a href="${AMAZON_BOOK_2_URL}" aria-label="When Bruised Hearts Heal on Amazon">
-              <img src="/assets/book-02-mockup.png" alt="When Bruised Hearts Heal book mockup">
+              ${optimizedImage({
+                src: "/assets/book-02-mockup.png",
+                webp: "/assets/book-02-mockup-web.webp",
+                alt: "When Bruised Hearts Heal book mockup",
+                width: 840,
+                height: 560,
+              })}
             </a>
             <div>
               <p class="eyebrow">Book Two</p>
@@ -203,7 +247,13 @@ function homePage() {
           </article>
           <article class="book-card secondary">
             <a href="${AMAZON_BOOK_3_URL}" aria-label="When Bruised Hearts Grow on Amazon">
-              <img src="/assets/book-03-mockup.png" alt="When Bruised Hearts Grow book mockup">
+              ${optimizedImage({
+                src: "/assets/book-03-mockup.png",
+                webp: "/assets/book-03-mockup-web.webp",
+                alt: "When Bruised Hearts Grow book mockup",
+                width: 840,
+                height: 560,
+              })}
             </a>
             <div>
               <p class="eyebrow">Book Three</p>
@@ -222,12 +272,25 @@ function homePage() {
           <a class="button primary" href="${AMAZON_SERIES_URL}">View the Series on Amazon</a>
         </div>
         <a href="${AMAZON_SERIES_URL}" aria-label="Meadow Lake Series on Amazon">
-          <img class="series-image" src="/assets/series-mockup-in-coffee-shop.png" alt="Meadow Lake series book mockup">
+          ${optimizedImage({
+            src: "/assets/series-mockup-in-coffee-shop.png",
+            webp: "/assets/series-mockup-in-coffee-shop-web.webp",
+            alt: "Meadow Lake series book mockup",
+            className: "series-image",
+            width: 1040,
+            height: 693,
+          })}
         </a>
       </section>
 
       <section class="author-strip" id="author">
-        <img src="/assets/author-profile.jpeg" alt="Lovern Martindale author photo">
+        ${optimizedImage({
+          src: "/assets/author-profile.jpeg",
+          webp: "/assets/author-profile-web.webp",
+          alt: "Lovern Martindale author photo",
+          width: 420,
+          height: 485,
+        })}
         <div>
           <p class="eyebrow">The author</p>
           <h2>Lovern Martindale</h2>
@@ -309,7 +372,16 @@ function bonusPackPage(query = {}) {
         <div class="signup-copy">
           <p class="eyebrow">Free reader bonus</p>
           <h1>Free Meadow Lake Reader Bonus Pack</h1>
-          <img class="bonus-pack-preview" src="/assets/bonus-pack-sneak-peek.png" alt="Preview of the Meadow Lake Reader Bonus Pack pages">
+          ${optimizedImage({
+            src: "/assets/bonus-pack-sneak-peek.png",
+            webp: "/assets/bonus-pack-sneak-peek-web.webp",
+            alt: "Preview of the Meadow Lake Reader Bonus Pack pages",
+            className: "bonus-pack-preview",
+            width: 1000,
+            height: 694,
+            loading: "eager",
+            fetchPriority: "high",
+          })}
           <p class="lede">For readers who love emotional small-town romance, coffee shop beginnings, family bonds, wounded hearts, and second chances that heal slowly.</p>
           <ul class="check-list compact">
             <li>Meadow Lake series reading guide</li>
@@ -757,9 +829,12 @@ async function serveStatic(req, res, pathname) {
   try {
     const data = await fs.readFile(filePath);
     const ext = path.extname(filePath).toLowerCase();
+    const cacheControl = pathname.startsWith("/assets/")
+      ? "public, max-age=604800"
+      : "public, max-age=3600";
     res.writeHead(200, {
       "Content-Type": mimeTypes[ext] || "application/octet-stream",
-      "Cache-Control": "public, max-age=3600",
+      "Cache-Control": cacheControl,
     });
     if (req.method === "HEAD") {
       res.end();

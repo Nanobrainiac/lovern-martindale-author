@@ -27,6 +27,16 @@ a {
   color: inherit;
 }
 
+picture {
+  display: block;
+}
+
+picture img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
 .site-header {
   align-items: center;
   background: rgba(255, 250, 244, 0.92);
