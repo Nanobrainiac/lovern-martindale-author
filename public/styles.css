@@ -35,6 +35,7 @@ picture img {
   display: block;
   height: auto;
   max-width: 100%;
+  object-fit: contain;
 }
 
 .site-header {
@@ -317,9 +318,9 @@ h3 {
 }
 
 .author-strip img {
-  aspect-ratio: 1;
   border-radius: 50%;
   box-shadow: var(--shadow);
+  height: 210px;
   object-fit: cover;
   object-position: 50% 35%;
   width: 210px;

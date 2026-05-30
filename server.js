@@ -44,6 +44,7 @@ const REVIEW_BOOKS = [
     romanceUrl: "https://www.romance.io/books/6a129d5a354976dfbde0faa2/when-bruised-hearts-grow-lovern-martindale",
   },
 ];
+const ASSET_VERSION = "20260530-ratio-fix";
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
@@ -115,7 +116,7 @@ function pageShell({ title, description, body, extraClass = "" }) {
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
 </head>
 <body class="${extraClass}">
   ${body}
@@ -126,9 +127,11 @@ function pageShell({ title, description, body, extraClass = "" }) {
 function optimizedImage({ src, webp, alt, className = "", width, height, loading = "lazy", fetchPriority = "" }) {
   const classAttr = className ? ` class="${escapeHtml(className)}"` : "";
   const fetchPriorityAttr = fetchPriority ? ` fetchpriority="${escapeHtml(fetchPriority)}"` : "";
+  const webpSrc = `${webp}?v=${ASSET_VERSION}`;
+  const fallbackSrc = `${src}?v=${ASSET_VERSION}`;
   return `<picture>
-        <source srcset="${webp}" type="image/webp">
-        <img${classAttr} src="${src}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="${loading}" decoding="async"${fetchPriorityAttr}>
+        <source srcset="${webpSrc}" type="image/webp">
+        <img${classAttr} src="${fallbackSrc}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="${loading}" decoding="async"${fetchPriorityAttr}>
       </picture>`;
 }
 
