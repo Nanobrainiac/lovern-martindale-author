@@ -18,6 +18,7 @@ const AMAZON_BOOK_2_URL = "https://www.amazon.com/When-Bruised-Hearts-Heal-Meado
 const AMAZON_BOOK_3_URL = "https://www.amazon.com/dp/B0H2RLC3JV";
 const AMAZON_SERIES_URL = "https://www.amazon.com/dp/B0GX2VPPSL";
 const GOODREADS_AUTHOR_URL = "https://www.goodreads.com/lovernmartindale";
+const CANONICAL_SITE_URL = "https://www.lovernmartindale.com";
 const REVIEW_BOOKS = [
   {
     number: "Book One",
@@ -133,6 +134,45 @@ function optimizedImage({ src, webp, alt, className = "", width, height, loading
         <source srcset="${webpSrc}" type="image/webp">
         <img${classAttr} src="${fallbackSrc}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="${loading}" decoding="async"${fetchPriorityAttr}>
       </picture>`;
+}
+
+function robotsTxt() {
+  return `User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /confirm
+Disallow: /thank-you
+Disallow: /unsubscribe
+
+Sitemap: ${CANONICAL_SITE_URL}/sitemap.xml
+`;
+}
+
+function sitemapXml() {
+  const pages = [
+    { path: "/", changefreq: "weekly", priority: "1.0" },
+    { path: "/bonus-pack", changefreq: "monthly", priority: "0.8" },
+    { path: "/reviews", changefreq: "monthly", priority: "0.7" },
+  ];
+
+  const urls = pages
+    .map(
+      (page) => `  <url>
+    <loc>${CANONICAL_SITE_URL}${page.path}</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`
+    )
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`;
 }
 
 function nav() {
@@ -865,6 +905,14 @@ async function router(req, res) {
     }
     if ((req.method === "GET" || req.method === "HEAD") && pathname.startsWith("/downloads/")) {
       await serveStatic(req, res, pathname);
+      return;
+    }
+    if ((req.method === "GET" || req.method === "HEAD") && pathname === "/robots.txt") {
+      send(res, 200, robotsTxt(), "text/plain; charset=utf-8");
+      return;
+    }
+    if ((req.method === "GET" || req.method === "HEAD") && pathname === "/sitemap.xml") {
+      send(res, 200, sitemapXml(), "application/xml; charset=utf-8");
       return;
     }
     if (req.method === "GET" && pathname === "/") {
