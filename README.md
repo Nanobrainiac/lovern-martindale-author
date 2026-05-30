@@ -120,7 +120,7 @@ The app supports delayed email sequences through:
 
 The send log uses a unique `send_key`, so if Heroku Scheduler runs twice, the same campaign step is not sent twice to the same subscriber.
 
-The default `welcome` campaign is a 6-email evergreen sequence:
+The default `welcome` campaign is a 19-email evergreen welcome and nurture sequence:
 
 - Day 0: welcome and bonus pack reminder
 - Day 2: Book 1 emotional hook
@@ -128,6 +128,19 @@ The default `welcome` campaign is a 6-email evergreen sequence:
 - Day 7: Book 2 bridge
 - Day 14: review/reader relationship note
 - Day 21: Book 3/read-through bridge
+- Day 35: Meadow Lake setting/home note
+- Day 49: healing romance reader fit
+- Day 63: Book 1 coffee hook reminder
+- Day 77: Book 2 gentle read-through nudge
+- Day 91: reader preference/question note
+- Day 105: review/shelf-add reminder
+- Day 119: Book 3 courage/read-through nudge
+- Day 133: family and found-family theme note
+- Day 147: bonus pack reminder/referral prompt
+- Day 161: reader preference reply prompt
+- Day 175: TBR/reactivation reminder
+- Day 189: full series reading path
+- Day 203: thank-you and review/follow close
 
 Run manually:
 
