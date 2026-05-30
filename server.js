@@ -915,6 +915,10 @@ async function router(req, res) {
       send(res, 200, sitemapXml(), "application/xml; charset=utf-8");
       return;
     }
+    if ((req.method === "GET" || req.method === "HEAD") && pathname === "/google7542b9e23a232154.html") {
+      await serveStatic(req, res, pathname);
+      return;
+    }
     if (req.method === "GET" && pathname === "/") {
       send(res, 200, homePage());
       return;
